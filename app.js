@@ -1,5 +1,5 @@
-const p1Score = document.querySelector('#p1Score');
-const p2Score = document.querySelector('#p2Score');
+const p1ScoreInput = document.querySelector('#p1Score');
+const p2ScoreInput = document.querySelector('#p2Score');
 const maxScoreInput = document.querySelector('#maxScore');
 const p1Button = document.querySelector('#p1Button');
 const p2Button = document.querySelector('#p2Button');
@@ -15,6 +15,8 @@ const p2Name = formContent.elements.p2Name;
 
 let maxScore = 7;
 let count = 1;
+let p1Score = parseInt(p1ScoreInput.innerText);
+let p2Score = parseInt(p2ScoreInput.innerText);
 
 playButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -31,42 +33,42 @@ maxScoreInput.addEventListener('change', () => {
 });
 
 p1Button.addEventListener('click', () => {
-    let score = parseInt(p1Score.innerText);
-    if (score < maxScore) {
-        score++;
+    if (p1Score < maxScore) {
+        p1Score++;
     }
-    if (score === maxScore) {
-        p1Score.classList.add('has-text-success');
-        p2Score.classList.add('has-text-danger');
+    if (p1Score === maxScore) {
+        p1ScoreInput.classList.add('has-text-success');
+        p2ScoreInput.classList.add('has-text-danger');
         p1Button.disabled = true;
         p2Button.disabled = true;
-        addRow(p1Name.value, score, parseInt(p2Score.innerText));
+        addRow(p1Name.value, p1Score, p2Score);
     }
-    p1Score.textContent = score;
+    p1ScoreInput.textContent = p1Score;
 });
 
 p2Button.addEventListener('click', () => {
-    let score = parseInt(p2Score.innerText);
-    if (score < maxScore) {
-        score++;
+    if (p2Score < maxScore) {
+        p2Score++;
     }
-    if (score === maxScore) {
-        p2Score.classList.add('has-text-success');
-        p1Score.classList.add('has-text-danger');
+    if (p2Score === maxScore) {
+        p2ScoreInput.classList.add('has-text-success');
+        p1ScoreInput.classList.add('has-text-danger');
         p1Button.disabled = true;
         p2Button.disabled = true;
-        addRow(p2Name.value, score, parseInt(p1Score.innerText));
+        addRow(p2Name.value, p2Score, p1Score);
     }
-    p2Score.textContent = score;
+    p2ScoreInput.textContent = p2Score;
 });
 
 resetButton.addEventListener('click', reset);
 
 function reset() {
-    p1Score.textContent = 0;
-    p2Score.textContent = 0;
-    p1Score.classList.remove('has-text-success', 'has-text-danger');
-    p2Score.classList.remove('has-text-success', 'has-text-danger');
+    p1Score = 0;
+    p1ScoreInput.textContent = 0;
+    p2Score = 0;
+    p2ScoreInput.textContent = 0;
+    p1ScoreInput.classList.remove('has-text-success', 'has-text-danger');
+    p2ScoreInput.classList.remove('has-text-success', 'has-text-danger');
     p1Button.disabled = false;
     p2Button.disabled = false;
 }
